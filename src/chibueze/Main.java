@@ -16,11 +16,24 @@ public class Main {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //I saw you could also use windowConstants.EXIT_ON_CLOSE
 //        frame.setLayout(new BorderLayout());
+
+
+
         SnakeGame snakeGame = new SnakeGame(boardWidth, boardHeight);
         frame.add(snakeGame);
 //        frame.add(snakeGame.gameOverPanel);
         frame.pack();
         snakeGame.requestFocusInWindow();
+
+        //creating gameover dialog
+        GameOverDialog gameOverDialog = new GameOverDialog(frame);
+        gameOverDialog.setVisible(true);
+        if (snakeGame.gameOver == true){
+            gameOverDialog.setVisible(true);
+        }
+
+
+
 
     }
 }

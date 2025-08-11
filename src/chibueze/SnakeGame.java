@@ -13,7 +13,6 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     int boardHeight;
     int tileSize = 20;
     int foodTileSize = 25;
-    JPanel gameOverPanel = new JPanel();
 
 
     //    We create an inner class to monitor the co-ord of the snake tile
@@ -103,7 +102,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         g.setFont(new Font("Arial", Font.PLAIN, 16));
         if (gameOver){
             g.setColor(Color.WHITE);
-            g.drawString("Game Over: " + String.valueOf(snakeBody.size()),tileSize-16, tileSize);
+            g.drawString("Game Over: " + snakeBody.size(),tileSize-16, tileSize);
         }else{
             g.drawString("Score: "+ String.valueOf(snakeBody.size()),tileSize-16, tileSize);
         }
