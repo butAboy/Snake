@@ -3,7 +3,6 @@ package chibueze;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.util.concurrent.BrokenBarrierException;
 
 public class GameOverDialog extends JDialog {
     private int dialogHeight = 250;
@@ -12,7 +11,7 @@ public class GameOverDialog extends JDialog {
     private JLabel message = new JLabel("Game Over", SwingConstants.CENTER); //constructor with text and Hor. alignments
     private JButton restartButton = new JButton();
     private JButton exitButton = new JButton("exit");
-
+    private JPanel buttonPanel = new JPanel();
 
     public GameOverDialog(JFrame owner){
         super(owner, "Game Over", true);
@@ -30,7 +29,7 @@ public class GameOverDialog extends JDialog {
         gameOverPanel.setBorder(BorderFactory.createEmptyBorder(15,15,15,15));//add padding to all sides of the panel
 
         //Style the message label.
-        message.setFont(new Font("Comic Sans", Font.BOLD, 25));
+        message.setFont(new Font("Comic Sans MS", Font.BOLD, 25));
         message.setForeground(Color.red);
         gameOverPanel.add(message, BorderLayout.CENTER);
 
@@ -39,17 +38,17 @@ public class GameOverDialog extends JDialog {
         restartButton.setPreferredSize(new Dimension(100, 30));
         restartButton.setForeground(Color.black);
         restartButton.setBackground(new Color(127, 205, 86));
-        restartButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        restartButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
         restartButton.setFocusable(false);
 
         exitButton.setText("exit");
         exitButton.setPreferredSize(new Dimension(100, 30));
         exitButton.setForeground(Color.black);
         exitButton.setBackground(new Color(127, 205, 86));
-        exitButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        exitButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
         exitButton.setFocusable(false);
 
-        JPanel buttonPanel = new JPanel();
+
         buttonPanel.setLayout(new BorderLayout(10, 10));
         buttonPanel.setBackground(gameOverPanel.getBackground());
         buttonPanel.add(restartButton, BorderLayout.WEST );
