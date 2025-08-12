@@ -14,6 +14,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     private int tileSize = 20;
     private int foodTileSize = 25;
     private boolean restart = false;
+    GameOverDialog gameOverDialog;
 
 
     /**  We create an inner class to monitor the co-ord of the snake tile **/
@@ -173,15 +174,35 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     }
 
     public void resetGame(){
+//        snakeBody.clear();
+//        placeFood();
+//        restart = false;
+//        gameOver = false;
+//        gameLoop.restart();
+////        draw();
+        snakeHead = new Tile(5,5); // Reset snake head position
         snakeBody.clear();
         placeFood();
-        restart = false;
-        gameLoop.start();
-//        draw();
+        gameOver = false;
+        velocityX = 0;
+        velocityY = 0;
+        setFocusable(true);
+
+        gameLoop.restart(); // Use restart() to ensure the timer is reset
+
+        repaint();
     }
 
     public void setRestart(boolean choice){
         restart = choice;
+        if(restart){
+            resetGame();
+        }
+    }
+
+    void initializeGameOver(GameOverDialog gameOver){
+        gameOverDialog = gameOver;
+        gameOverDialog.getGame(this);
     }
 
     @Override
@@ -189,12 +210,13 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         move();
         repaint();
         if (gameOver == true){
+            gameOverDialog.setVisible(true);
             gameLoop.stop();
         }
 
-        if(restart == true){
-            resetGame();
-        }
+//        if(restart == true){
+//            resetGame();
+//        }
 
 
     }

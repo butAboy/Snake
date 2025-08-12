@@ -14,8 +14,8 @@ public class GameOverDialog extends JDialog {
     private JButton restartButton = new JButton("restart");
     private JButton exitButton = new JButton("exit");
     private JPanel buttonPanel = new JPanel();
-
-    public GameOverDialog(JFrame owner, SnakeGame game){
+    SnakeGame game;
+    public GameOverDialog(JFrame owner){
         super(owner, "Game Over", true);
 
         setSize(dialogWidth, dialogHeight);
@@ -43,9 +43,10 @@ public class GameOverDialog extends JDialog {
         restartButton.addActionListener(new ActionListener() {
              @Override
              public void actionPerformed(ActionEvent e) {
-                 dispose();
                  game.setRestart(true);
-                 game.actionPerformed(e);
+                 dispose();
+                 game.requestFocusInWindow();
+//                 game.actionPerformed(e);
              }
         });
 
@@ -79,9 +80,9 @@ public class GameOverDialog extends JDialog {
         add(gameOverPanel);
 //        add(buttonPanel);
 
+    }
 
-
-
-
+    void getGame(SnakeGame game){
+        this.game = game;
     }
 }

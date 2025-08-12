@@ -18,10 +18,12 @@ public class Main {
 //        frame.setLayout(new BorderLayout());
 
 
+        //creating game over dialog
+        GameOverDialog gameOverDialog = new GameOverDialog(frame);
 
         SnakeGame snakeGame = new SnakeGame(boardWidth, boardHeight);
-        //creating gameover dialog
-        GameOverDialog gameOverDialog = new GameOverDialog(frame, snakeGame);
+        snakeGame.initializeGameOver(gameOverDialog);
+
         frame.add(snakeGame);
 //        frame.add(snakeGame.gameOverPanel);
         frame.pack();
