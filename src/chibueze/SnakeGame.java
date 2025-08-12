@@ -9,13 +9,14 @@ import javax.swing.*;
 object we want to be manipulable and dynamic **/
 
 public class SnakeGame extends JPanel implements ActionListener, KeyListener {
-    int boardWidth;
-    int boardHeight;
-    int tileSize = 20;
-    int foodTileSize = 25;
+    private int boardWidth;
+    private int boardHeight;
+    private int tileSize = 20;
+    private int foodTileSize = 25;
+    private boolean restart = false;
 
 
-    //    We create an inner class to monitor the co-ord of the snake tile
+    /**  We create an inner class to monitor the co-ord of the snake tile **/
     private class Tile{
         int x;
         int y;
@@ -70,6 +71,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         gameLoop.start();
 
     }
+
 
     public void paintComponent(Graphics g){//override the paintComponent method of the Panel class
         super.paintComponent(g);
@@ -152,6 +154,8 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         snakeHead.x += velocityX;
         snakeHead.y += velocityY;
 
+
+
         //game over conditions
         for (Tile snakePart : snakeBody){
             if (collision(snakeHead, snakePart)){
@@ -168,6 +172,18 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         }
     }
 
+    public void resetGame(){
+        snakeBody.clear();
+        placeFood();
+        restart = false;
+        gameLoop.start();
+//        draw();
+    }
+
+    public void setRestart(boolean choice){
+        restart = choice;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         move();
@@ -175,6 +191,11 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         if (gameOver == true){
             gameLoop.stop();
         }
+
+        if(restart == true){
+            resetGame();
+        }
+
 
     }
     //keyListeners overridden methods

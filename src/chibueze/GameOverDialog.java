@@ -3,17 +3,19 @@ package chibueze;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GameOverDialog extends JDialog {
     private int dialogHeight = 250;
     private int dialogWidth = 300;
     private JPanel gameOverPanel = new JPanel();
     private JLabel message = new JLabel("Game Over", SwingConstants.CENTER); //constructor with text and Hor. alignments
-    private JButton restartButton = new JButton();
+    private JButton restartButton = new JButton("restart");
     private JButton exitButton = new JButton("exit");
     private JPanel buttonPanel = new JPanel();
 
-    public GameOverDialog(JFrame owner){
+    public GameOverDialog(JFrame owner, SnakeGame game){
         super(owner, "Game Over", true);
 
         setSize(dialogWidth, dialogHeight);
@@ -31,22 +33,36 @@ public class GameOverDialog extends JDialog {
         //Style the message label.
         message.setFont(new Font("Comic Sans MS", Font.BOLD, 25));
         message.setForeground(Color.red);
-        gameOverPanel.add(message, BorderLayout.CENTER);
 
         //style the restart button
-        restartButton.setText("restart");
         restartButton.setPreferredSize(new Dimension(100, 30));
-        restartButton.setForeground(Color.black);
+        restartButton.setForeground(Color.white);
         restartButton.setBackground(new Color(127, 205, 86));
         restartButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
         restartButton.setFocusable(false);
+        restartButton.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 dispose();
+                 game.setRestart(true);
+                 game.actionPerformed(e);
+             }
+        });
 
-        exitButton.setText("exit");
+        //style exit button
         exitButton.setPreferredSize(new Dimension(100, 30));
-        exitButton.setForeground(Color.black);
+        exitButton.setForeground(Color.red);
         exitButton.setBackground(new Color(127, 205, 86));
         exitButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
         exitButton.setFocusable(false);
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                owner.dispose();
+                System.exit(0);
+            }
+        });
 
 
         buttonPanel.setLayout(new BorderLayout(10, 10));
@@ -54,7 +70,9 @@ public class GameOverDialog extends JDialog {
         buttonPanel.add(restartButton, BorderLayout.WEST );
         buttonPanel.add(exitButton, BorderLayout.EAST );
 
+        //add the components to the gameOverPanel
         gameOverPanel.add(buttonPanel, BorderLayout.SOUTH);
+        gameOverPanel.add(message, BorderLayout.CENTER);
 
 
 

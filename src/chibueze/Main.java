@@ -20,15 +20,16 @@ public class Main {
 
 
         SnakeGame snakeGame = new SnakeGame(boardWidth, boardHeight);
+        //creating gameover dialog
+        GameOverDialog gameOverDialog = new GameOverDialog(frame, snakeGame);
         frame.add(snakeGame);
 //        frame.add(snakeGame.gameOverPanel);
         frame.pack();
         snakeGame.requestFocusInWindow();
 
-        //creating gameover dialog
-        GameOverDialog gameOverDialog = new GameOverDialog(frame);
-        gameOverDialog.setVisible(true);
-        if (snakeGame.gameOver == true){
+
+//        gameOverDialog.setVisible(true);
+        if (snakeGame.gameOver){
             gameOverDialog.setVisible(true);
         }
 
